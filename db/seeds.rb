@@ -31,16 +31,16 @@ end
 20.times do
   Comment.create(
     content: Faker::Lorem.paragraphs(number: 2),
-    user_id: rand(1..3),
-    publication_id: rand(1..9)
+    publication_id: rand(1..9),
+    user_id: rand(1..3)
   )
 end
 
 kinds = Publication::Kinds
 50.times do
   Reaction.create(
-    kind: kinds.sample,
     user_id: rand(1..3),
-    publication_id: rand(1..9)
+    publication_id: rand(1..9),
+    kind: kinds.sample
   )
 end

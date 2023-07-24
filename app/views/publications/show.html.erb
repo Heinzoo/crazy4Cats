@@ -1,10 +1,23 @@
-<p style="color: green"><%= notice %></p>
+<div class="toast align-items-center text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      <%= notice %>
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
 
-<%= render @publication %>
+<div class="row">
+  <%= render @publication %>
 
-<div>
-  <%= link_to "Edit this publication", edit_publication_path(@publication) %> |
-  <%= link_to "Back to publications", publications_path %>
+  <div class="col-8 py-2">
+    <h5 class="fw-bold text-center">Comentarios</h5>
+    <%= render @publication.comments %>
 
-  <%= button_to "Destroy this publication", @publication, method: :delete %>
+    <div class="justify-content-center align-items-center pt-2">
+      <% if user_signed_in? %>
+        <%= render "comments/form", comment: @comment %>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -2,13 +2,32 @@
   <div class="card text-center border-success">
     <img src="<%= publication.image %>" style="height: 200px; object-fit: cover;">
     <div class="card-header d-flex justify-content-around">
-      <%= link_to publication do %>
-        <i class="bi bi-hand-thumbs-up-fill text-success fs-5"></i>
-        <%= publication.reactions.select { | publication | publication[:kind] == 'like' }.count %>
-      <% end %>
-      <%= link_to publication do %>
-        <i class="bi bi-hand-thumbs-down-fill text-danger fs-5"></i>
-        <%= publication.reactions.select { | publication | publication[:kind] == 'dislike' }.count %>
+      <% Publication::Kinds.each do |kind| %>
+        <% if kind == 'like' %>
+          <% if action_name == 'show' %>
+            <%= button_to new_user_reaction_path(publication_id: @publication.id, kind: kind), method: :post, style: "all: unset; cursor: pointer"  do %>
+              <i class="bi bi-hand-thumbs-up-fill text-success fs-5"></i>
+              <%= publication.reactions.select { | publication | publication[:kind] == 'like' }.count %>
+            <% end %>
+          <% else %>
+            <div>
+              <i class="bi bi-hand-thumbs-up-fill text-success fs-5"></i>
+              <%= publication.reactions.select { | publication | publication[:kind] == 'like' }.count %>
+            </div>
+          <% end %>
+        <% else %>
+          <% if action_name == 'show' %>
+            <%= button_to new_user_reaction_path(publication_id: @publication.id, kind: kind), method: :post, style: "all: unset; cursor: pointer"  do %>
+              <i class="bi bi-hand-thumbs-up-fill text-danger fs-5"></i>
+              <%= publication.reactions.select { | publication | publication[:kind] == 'dislike' }.count %>
+            <% end %>
+          <% else %>
+            <div>
+              <i class="bi bi-hand-thumbs-up-fill text-danger fs-5"></i>
+              <%= publication.reactions.select { | publication | publication[:kind] == 'dislike' }.count %>
+            </div>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
     <div class="card-body">

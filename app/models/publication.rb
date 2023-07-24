@@ -5,4 +5,5 @@ class Publication < ApplicationRecord
   # accepts_nested_attributes_for :comments
 
   Kinds = %w[like dislike].freeze
+  KindsSpanish = {"like" => "Me gusta", "dislike" => "No me gusta"}.freeze
 end

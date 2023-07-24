@@ -12,12 +12,10 @@
 
   <div class="col-8 py-2">
     <h5 class="fw-bold text-center">Comentarios</h5>
-    <%= render @publication.comments %>
-
+    <%= render "comments/comment" %>
     <div class="justify-content-center align-items-center pt-2">
-      <% if user_signed_in? %>
-        <%= render "comments/form", comment: @comment %>
-      <% end %>
+      <%= render "comments/form" %>
     </div>
   </div>
+  
 </div>

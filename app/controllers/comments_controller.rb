@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   def create
     @publication = Publication.find(params[:comment][:publication_id])
     @comment = Comment.new(comment_params)
-    @comment.user = current_user if current_user.present?
+    @comment.user = current_user if current_user.present? 
     
     respond_to do |format|
       if @comment.save
